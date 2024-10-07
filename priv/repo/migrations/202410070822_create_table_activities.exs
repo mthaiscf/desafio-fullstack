@@ -20,7 +20,7 @@ defmodule DesafioFullstack.Repo.Migrations.CreateTableActivities do
       add :email, :string, null: true, comment: "E-mail de contato da atividade"
       add :phone_number, :string, null: true, comment: "Número de telefone de contato para informações sobre a atividade"
       add :city, :string, null: false, comment: "Cidade onde a atividade reside"
-      add :tags, :map, null: false, comment: "Tags que classificam a atividade"
+      add :tags, {:array, :string}, null: false, comment: "Tags que classificam a atividade"
 
       timestamps()
     end

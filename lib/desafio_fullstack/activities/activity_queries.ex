@@ -22,8 +22,10 @@ defmodule DesafioFullstack.Activities.ActivityQueries do
   end
 
   def get_by_title(query \\ base(), title) do
+    like = "%#{title}%"
+
     from(activities in query,
-      where: activities.title == ^title
+      where: like(activities.title, ^like)
     )
   end
 

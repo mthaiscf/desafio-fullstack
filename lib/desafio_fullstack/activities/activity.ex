@@ -31,7 +31,7 @@ defmodule DesafioFullstack.Activities.Activity do
     email: String.t(),
     phone_number: String.t(),
     city: String.t(),
-    tags: map()
+    tags: [String.t()]
   }
 
   @primary_key {:id, Ecto.UUID, autogenerate: true}
@@ -48,7 +48,7 @@ defmodule DesafioFullstack.Activities.Activity do
     field(:email, :string)
     field(:phone_number, :string)
     field(:city, :string)
-    field(:tags, :map)
+    field(:tags, {:array, :string})
     timestamps()
   end
 

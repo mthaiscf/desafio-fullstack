@@ -19,7 +19,7 @@ defmodule DesafioFullstack.ActivityFactory do
           email: Internet.email(),
           phone_number: Phone.PtBr.phone(),
           city: "Maceió",
-          tags: %{tags: ["gratuito"]}
+          tags: ["gratuito", "esportes", "museus", "parques"]
         }
       end
     end

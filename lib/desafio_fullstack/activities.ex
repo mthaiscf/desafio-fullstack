@@ -20,7 +20,7 @@ defmodule DesafioFullstack.Activities do
     email: String.t(),
     phone_number: String.t(),
     city: String.t(),
-    tags: map()
+    tags: [String.t()]
   }
 
   @doc """
@@ -85,7 +85,7 @@ defmodule DesafioFullstack.Activities do
     iex > Activities.get_by_tags([""])
     []
   """
-  @spec get_by_tags(tags: map()) :: [Activity.t()] | []
+  @spec get_by_tags(tags: [String.t()]) :: [Activity.t()] | []
   def get_by_tags(tags) do
     tags
     |> ActivityQueries.get_by_tags()

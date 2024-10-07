@@ -29,6 +29,11 @@ defmodule DesafioFullstack.Seeds do
   end
 
   defp activity_params() do
+
+    tags_list = ["gratuito", "esportes", "museus", "parques",  "bom para crianças", "bom para casais", "educativo"]
+    number_list = [1, 2, 3]
+    number = Enum.random(number_list)
+
     %{
       title: "#{Commerce.department()} #{Color.fancy_name}",
       photo: "https://picsum.photos/200/300",
@@ -41,7 +46,7 @@ defmodule DesafioFullstack.Seeds do
       email: Internet.email(),
       phone_number: Phone.PtBr.phone(),
       city: "Maceió",
-      tags: %{tags: ["gratuito"]}
+      tags: Enum.take_random(tags_list, number)
     }
   end
 
