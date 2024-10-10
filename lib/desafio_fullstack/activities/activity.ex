@@ -31,7 +31,7 @@ defmodule DesafioFullstack.Activities.Activity do
     email: String.t(),
     phone_number: String.t(),
     city: String.t(),
-    tags: [String.t()]
+    tags: list()
   }
 
   @primary_key {:id, Ecto.UUID, autogenerate: true}

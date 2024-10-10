@@ -1,28 +1,29 @@
-defmodule DesafioFullstackWeb.DesafioFullstackWeb.SearchActivitiesLive do
+defmodule DesafioFullstackWeb.SearchActivitiesLive do
 
   use Phoenix.LiveView
 
   alias DesafioFullstack.Activities
 
-
-  def mount(_session, %{"activities_list" => activities_list, "activity" => activity}, socket) do
-    {:ok, assign(socket, %{activities_list: activities_list, activity: activity})}
+  def mount(_params, _session, socket) do
+    {:ok, assign(socket, %{activities_list: Activities.get_by_city("Maceió"), activity: get_surprise_activity()})}
   end
 
   def handle_event("search_activities", %{"title" => title, "tags" => tags}, socket) do
-    activities_list = Activities.get_by_title_and_tags(title, tags)
+    activities_list = Activities.search_activities(title, tags)
     {:noreply, assign(socket, activities_list: activities_list)}
   end
 
   def handle_event("get_surprise_activity", _params, socket) do
-    activity = Activities.get_random()
-    {:noreply, assign(socket, activity: activity)}
+    {:noreply, assign(socket, activity: get_surprise_activity())}
   end
 
-  def handle_event("start", _params, socket) do
-    activities_list = Activities.get_by_city("Maceió")
-    activity = Activities.get_random()
-    {:noreply, assign(socket, activities_list: activities_list, activity: activity)}
+  def handle_event("get_detail", _params, socket) do
+    assign(socket, activity: get_surprise_activity())
+    {:noreply, push_navigate(socket, to: "/detail")}
+  end
+
+  def get_surprise_activity do
+    Activities.get_random()
   end
 
   def render(assigns) do
@@ -82,6 +83,9 @@ defmodule DesafioFullstackWeb.DesafioFullstackWeb.SearchActivitiesLive do
             font-size: 0.9rem; /* Tamanho da fonte */
             color: #333; /* Cor do texto */
             bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 10px 0;
         }
         .title {
             position: absolute; /* Para posicionar o título sobre a imagem */
@@ -173,10 +177,12 @@ defmodule DesafioFullstackWeb.DesafioFullstackWeb.SearchActivitiesLive do
         </a>
     </div>
 
-    <div class="image-container">
+    <div class="image-container"  phx-click="get_detail">
         <img src="https://picsum.photos/536/354" alt="Imagem de Maceió">
-        <div class="title"><strong>Ativ1</strong></div>
-        <div class="tag">Gratuito</div>
+        <div class="title"><strong><%= @activity.title %></strong></div>
+        <%= for tag <- @activity.tags do %>
+          <div class="tag"><%= tag %></div>
+        <% end %>
     </div>
 
     <div class="section-title">
@@ -202,17 +208,41 @@ defmodule DesafioFullstackWeb.DesafioFullstackWeb.SearchActivitiesLive do
     </form>
 
     <div class="co-working" id="co-working-tag">
-        Co-working
-        <span class="remove-tag" onclick="removeTag()">×</span> <!-- 'x' para remover -->
+        gratuito
+        <span class="remove-tag" onclick="removeTag()">×</span>
+    </div>
+    <div class="co-working" id="co-working-tag">
+        esportes
+        <span class="remove-tag" onclick="removeTag()">×</span>
+    </div>
+    <div class="co-working" id="co-working-tag">
+        museus
+        <span class="remove-tag" onclick="removeTag()">×</span>
+    </div>
+    <div class="co-working" id="co-working-tag">
+        parques
+        <span class="remove-tag" onclick="removeTag()">×</span>
+    </div>
+    <div class="co-working" id="co-working-tag">
+        bom para crianças
+        <span class="remove-tag" onclick="removeTag()">×</span>
+    </div>
+    <div class="co-working" id="co-working-tag">
+        bom para casais
+        <span class="remove-tag" onclick="removeTag()">×</span>
+    </div>
+    <div class="co-working" id="co-working-tag">
+        educativo
+        <span class="remove-tag" onclick="removeTag()">×</span>
     </div>
 
     <div class="image-container">
-        <div class="activity-count">1 atividade encontrada</div>
-        <%= for activity <- @activities_list do %>
-          <img src="https://picsum.photos/536/200" alt="Imagem atividade">
-          <div class="title"><strong><%= activity.title %></strong></div>
-          <%= for tag <- {@activity.tags} do %>
-            <div class="tag"><%= tag %></div>
+        <div class="activity-count">Atividade(s) encontrada(s)</div>
+        <%= for actv <- @activities_list do %>
+          <img src="https://picsum.photos/536/200" alt="Imagem atividade" phx-click="get_detail">
+          <div class="title"><strong><%= actv.title %></strong></div>
+          <%= for t <- actv.tags do %>
+                <div class="tag"><%= t %></div>
           <% end %>
         <% end %>
     </div>

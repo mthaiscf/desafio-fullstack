@@ -20,7 +20,7 @@ defmodule DesafioFullstack.Activities do
     email: String.t(),
     phone_number: String.t(),
     city: String.t(),
-    tags: [String.t()]
+    tags: list()
   }
 
   @doc """
@@ -155,4 +155,20 @@ defmodule DesafioFullstack.Activities do
     |> Repo.all()
   end
 
+  @spec get_by_title_and_tags(String.t(), [String.t()]) :: [Activity.t()] | []
+  def search_activities(title, tags) when (title != nil and tags != nil) do
+    get_by_title_and_tags(title, tags)
+  end
+
+  def search_activities(_title, tags) when (tags != nil) do
+    get_by_tags(tags)
+  end
+
+  def search_activities(title, _tags) when (title != nil) do
+    get_by_title(title)
+  end
+
+  def search_activities(_title, _tags)do
+    get_by_city("Maceió")
+  end
 end

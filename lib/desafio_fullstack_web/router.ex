@@ -17,9 +17,8 @@ defmodule DesafioFullstackWeb.Router do
   scope "/", DesafioFullstackWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-
-    live "/home", DesafioFullstackWeb.SearchActivitiesLive
+    live "/", SearchActivitiesLive
+    live "/detail", DetailActivityLive
   end
 
   # Other scopes may use custom stacks.
