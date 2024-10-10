@@ -57,44 +57,59 @@ defmodule DesafioFullstackWeb.SearchActivitiesLive do
             color: #333;
             margin-bottom: 10px;
             width: 100%;
-            max-width: 536px; /* Largura das imagens */
+            max-width: 536px;
             padding: 0 10px;
         }
+        .link-right {
+            font-size: 1rem;
+            color: #1E90FF;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            display: inline-block;
+        }
         .image-container {
-            position: relative; /* Permite o posicionamento absoluto dos elementos filhos */
+            position: relative;
             max-width: 536px;
             margin-bottom: 20px;
-            text-align: left; /* Alinha texto à esquerda */
+            text-align: left;
         }
         img {
-            max-width: 100%; /* Para que a imagem não extrapole o container */
+            max-width: 100%;
             height: auto;
             object-fit: cover;
             border-radius: 15px;
-            margin-bottom: 10px; /* Espaçamento entre a imagem e o input */
-        }
-        .tag {
-            position: absolute; /* Para posicionar o texto sobre a imagem */
-            bottom: 10px; /* Distância do fundo */
-            left: 20px; /* Distância do lado esquerdo */
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
-            padding: 2px 5px; /* Espaçamento interno */
-            border-radius: 3px; /* Bordas arredondadas */
-            font-size: 0.9rem; /* Tamanho da fonte */
-            color: #333; /* Cor do texto */
-            bottom: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            margin: 10px 0;
+            margin-bottom: 10px;
         }
         .title {
-            position: absolute; /* Para posicionar o título sobre a imagem */
-            bottom: 60px; /* Distância acima da tag */
-            left: 20px; /* Distância do lado esquerdo */
-            padding: 2px 5px; /* Espaçamento interno */
-            border-radius: 2px; /* Bordas arredondadas */
-            font-size: 1.2rem; /* Tamanho da fonte */
-            color: rgba(255, 255, 255, 0.8); /* Cor do texto */
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            padding: 2px 5px;
+            border-radius: 2px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .tag-container {
+            position: absolute;
+            bottom: 20px; /* Distância do fundo da imagem */
+            left: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px; /* Espaçamento entre as tags */
+        }
+        .tag {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            color: #333;
         }
         input {
             padding: 10px;
@@ -102,151 +117,108 @@ defmodule DesafioFullstackWeb.SearchActivitiesLive do
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            width: 536px; /* Largura igual à das imagens */
-            margin-left: 20px; /* Alinhamento à esquerda */
+            width: 536px;
         }
         .result {
             margin-top: 10px;
             font-size: 1.2rem;
             color: #333;
         }
-        .link-right {
-            font-size: 1rem; /* Ajuste para manter uniformidade */
-            color: #1E90FF;
-            text-decoration: none;
-            margin-left: 10px; /* Espaço entre o título e o link */
-            display: flex;
-            align-items: center; /* Alinha verticalmente com o ícone */
-        }
-        .icon {
-            width: 20px; /* Tamanho reduzido do ícone */
-            height: 20px; /* Tamanho reduzido do ícone */
-            margin-right: 8px; /* Espaço entre o ícone e o texto */
-            display: inline-block; /* Garante o alinhamento do ícone com o texto */
-        }
-        .section-title div {
-            display: flex;
-            align-items: center; /* Alinha o ícone e o texto no centro */
-        }
         .co-working {
-            font-size: 0.9rem; /* Tamanho da fonte para a tag co-working */
-            color: black; /* Cor do texto preta */
-            margin-top: 5px; /* Espaço acima da tag para alinhamento */
-            background-color: #d3d3d3; /* Fundo cinza */
-            padding: 2px 5px; /* Espaçamento interno */
-            border-radius: 3px; /* Bordas arredondadas */
-            display: inline-block; /* Para que a tag tenha um espaço em volta */
-            position: relative; /* Para o posicionamento do 'x' */
-            margin-left: 20px; /* Alinhamento à esquerda igual ao input */
+            font-size: 0.9rem;
+            color: black;
+            margin-top: 5px;
+            background-color: #d3d3d3;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
         }
         .remove-tag {
-            margin-left: 5px; /* Espaço à esquerda do 'x' */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
-            font-weight: bold; /* Negrito para o 'x' */
-            color: black; /* Cor do 'x' igual à da tag */
+            margin-left: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: black;
         }
         .activity-count {
-            font-size: 1rem; /* Tamanho da fonte para a contagem de atividades */
-            color: #333; /* Cor do texto */
-            margin-top: 5px; /* Espaço acima do texto */
-            text-align: left; /* Alinhado à esquerda */
-            margin-left: 20px; /* Para manter o mesmo alinhamento que as imagens */
+            font-size: 1rem;
+            color: #333;
+            margin-top: 5px;
+            text-align: left;
+            max-width: 536px;
+            margin-left: 0px;
         }
-    </style>
+      </style>
 
-
-    <script>
+      <script>
         function removeTag() {
             const tag = document.getElementById('co-working-tag');
             if (tag) {
-                tag.style.display = 'none'; // Esconde a tag ao clicar no 'x'
+                tag.style.display = 'none';
             }
         }
-    </script>
+      </script>
 
-    <h1><strong>O que fazer em <span class="maceio">Maceió</span>?</strong></h1>
+      <h1><strong>O que fazer em <span class="maceio">Maceió</span>?</strong></h1>
 
-    <div class="section-title">
+      <div class="section-title">
         <div>
-            <Heroicons.sparkles solid class="icon" />
-            <span>ATIVIDADE SURPRESA</span>
+          <Heroicons.sparkles solid class="icon" />
+          <span>ATIVIDADE SURPRESA</span>
         </div>
         <a href="#" class="link-right" phx-click="get_surprise_activity">
-            <Heroicons.arrow_path solid class="icon"/>
-            Outra sugestão
+          <Heroicons.arrow_path solid class="icon"/>
+          Outra sugestão
         </a>
-    </div>
+      </div>
 
-    <div class="image-container"  phx-click="get_detail">
+      <div class="image-container" phx-click="get_detail">
         <img src="https://picsum.photos/536/354" alt="Imagem de Maceió">
         <div class="title"><strong><%= @activity.title %></strong></div>
-        <%= for tag <- @activity.tags do %>
-          <div class="tag"><%= tag %></div>
-        <% end %>
-    </div>
-
-    <div class="section-title">
-      <div>
-        <Heroicons.magnifying_glass solid class="icon" />
-        <span>OUTRAS ATIVIDADES</span>
+        <!-- Container para as tags, posicionado abaixo do título -->
+        <div class="tag-container">
+          <%= for tag <- @activity.tags do %>
+            <div class="tag"><%= tag %></div>
+          <% end %>
+        </div>
       </div>
 
-      <a href="#" class="link-right">
-        <Heroicons.funnel solid class="icon" />
-        Categorias
-      </a>
-    </div>
+      <div class="section-title">
+        <div>
+          <Heroicons.magnifying_glass solid class="icon" />
+          <span>OUTRAS ATIVIDADES</span>
+        </div>
 
-    <form phx-change="change_note_text" phx-submit="search_activities">
-      <div class="field">
-        <label class="label" for="">
-          <div class="control">
-            <input class="input" type="text" name="search_field" autocomplete="off"/>
-          </div>
-        </label>
+        <a href="#" class="link-right">
+          <Heroicons.funnel solid class="icon" />
+          Categorias
+        </a>
       </div>
-    </form>
 
-    <div class="co-working" id="co-working-tag">
-        gratuito
-        <span class="remove-tag" onclick="removeTag()">×</span>
-    </div>
-    <div class="co-working" id="co-working-tag">
-        esportes
-        <span class="remove-tag" onclick="removeTag()">×</span>
-    </div>
-    <div class="co-working" id="co-working-tag">
-        museus
-        <span class="remove-tag" onclick="removeTag()">×</span>
-    </div>
-    <div class="co-working" id="co-working-tag">
-        parques
-        <span class="remove-tag" onclick="removeTag()">×</span>
-    </div>
-    <div class="co-working" id="co-working-tag">
-        bom para crianças
-        <span class="remove-tag" onclick="removeTag()">×</span>
-    </div>
-    <div class="co-working" id="co-working-tag">
-        bom para casais
-        <span class="remove-tag" onclick="removeTag()">×</span>
-    </div>
-    <div class="co-working" id="co-working-tag">
-        educativo
-        <span class="remove-tag" onclick="removeTag()">×</span>
-    </div>
+      <form phx-change="change_note_text" phx-submit="search_activities">
+        <div class="field">
+          <label class="label" for="">
+            <div class="control">
+              <input class="input" type="text" name="search_field" autocomplete="off"/>
+            </div>
+          </label>
+        </div>
+      </form>
 
-    <div class="image-container">
-        <div class="activity-count">Atividade(s) encontrada(s)</div>
-        <%= for actv <- @activities_list do %>
+      <div class="activity-count">Atividade(s) encontrada(s)</div>
+
+      <!-- Reaplicação do estilo de título e tags para cada atividade encontrada -->
+      <%= for actv <- @activities_list do %>
+        <div class="image-container">
           <img src="https://picsum.photos/536/200" alt="Imagem atividade" phx-click="get_detail">
           <div class="title"><strong><%= actv.title %></strong></div>
-          <%= for t <- actv.tags do %>
-                <div class="tag"><%= t %></div>
-          <% end %>
-        <% end %>
-    </div>
+          <div class="tag-container">
+            <%= for t <- actv.tags do %>
+              <div class="tag"><%= t %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     """
   end
-
 end

@@ -183,6 +183,7 @@ defmodule DesafioFullstackWeb.DetailActivityLive do
             </div>
           </div>
         </div>
+
       </body>
     """
   end
