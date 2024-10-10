@@ -19,6 +19,7 @@ defmodule DesafioFullstackWeb.Router do
 
     get "/", PageController, :home
 
+    live "/home", DesafioFullstackWeb.SearchActivitiesLive
   end
 
   # Other scopes may use custom stacks.

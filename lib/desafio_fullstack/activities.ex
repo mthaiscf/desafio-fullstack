@@ -63,14 +63,14 @@ defmodule DesafioFullstack.Activities do
     iex > Activities.get_by_city(["")
     []
   """
-  @spec get_by_city(city: String.t()) :: [Activity.t()] | []
+  @spec get_by_city(String.t()) :: [Activity.t()] | []
   def get_by_city(city) do
     city
     |> ActivityQueries.get_by_city()
     |> Repo.all()
   end
 
-    @doc """
+  @doc """
 
     Recupera as atividades registradas por tags
 
@@ -85,7 +85,7 @@ defmodule DesafioFullstack.Activities do
     iex > Activities.get_by_tags([""])
     []
   """
-  @spec get_by_tags(tags: [String.t()]) :: [Activity.t()] | []
+  @spec get_by_tags([String.t()]) :: [Activity.t()] | []
   def get_by_tags(tags) do
     tags
     |> ActivityQueries.get_by_tags()
@@ -107,7 +107,7 @@ defmodule DesafioFullstack.Activities do
     iex > Activities.get_by_title(["")
     []
   """
-  @spec get_by_title(title: String.t()) :: [Activity.t()] | []
+  @spec get_by_title(String.t()) :: [Activity.t()] | []
   def get_by_title(title) do
     title
     |> ActivityQueries.get_by_title()
@@ -130,6 +130,29 @@ defmodule DesafioFullstack.Activities do
   def get_random() do
     ActivityQueries.get_random()
     |> Repo.one()
+  end
+
+  @doc """
+
+    Recupera as atividades registradas pelo título e tags selecionadas
+
+  ## Exemplo:
+
+    iex> import DesafioFullstack.ActivityFactory
+    iex>
+    iex> params = insert(:activity, title: "Parque Botânico",  tags: ["gratuito"])
+    iex>
+  	iex> Activities.get_by_title_and_tags("Parque Botânico", ["gratuito"])
+    [%Activity{}]
+    iex > Activities.get_by_title_and_tags("", [""])
+    []
+  """
+  @spec get_by_title_and_tags(String.t(), [String.t()]) :: [Activity.t()] | []
+  def get_by_title_and_tags(title, tags) do
+    title
+    |> ActivityQueries.get_by_title()
+    |> ActivityQueries.get_by_tags(tags)
+    |> Repo.all()
   end
 
 end
