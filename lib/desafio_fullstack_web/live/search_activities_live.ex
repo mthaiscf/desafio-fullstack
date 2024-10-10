@@ -5,9 +5,8 @@ defmodule DesafioFullstackWeb.DesafioFullstackWeb.SearchActivitiesLive do
   alias DesafioFullstack.Activities
 
 
-
-  def mount(_session, socket) do
-    {:ok, assign(socket, %{activities_list: Activities.get_by_city("Maceió"), activity: Activities.get_random()})}
+  def mount(_session, %{"activities_list" => activities_list, "activity" => activity}, socket) do
+    {:ok, assign(socket, %{activities_list: activities_list, activity: activity})}
   end
 
   def handle_event("search_activities", %{"title" => title, "tags" => tags}, socket) do
@@ -207,7 +206,16 @@ defmodule DesafioFullstackWeb.DesafioFullstackWeb.SearchActivitiesLive do
         <span class="remove-tag" onclick="removeTag()">×</span> <!-- 'x' para remover -->
     </div>
 
-
+    <div class="image-container">
+        <div class="activity-count">1 atividade encontrada</div>
+        <%= for activity <- @activities_list do %>
+          <img src="https://picsum.photos/536/200" alt="Imagem atividade">
+          <div class="title"><strong><%= activity.title %></strong></div>
+          <%= for tag <- {@activity.tags} do %>
+            <div class="tag"><%= tag %></div>
+          <% end %>
+        <% end %>
+    </div>
     """
   end
 
