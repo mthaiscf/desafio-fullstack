@@ -25,6 +25,11 @@ defmodule DesafioFullstackWeb.DetailActivityLive do
             justify-content: flex-start;
             min-height: 100vh;
         }
+        .container {
+          max-width: 900px;  /* Largura máxima do conteúdo centralizado */
+          margin: 0 auto;  /* Centraliza o conteúdo com espaços laterais iguais */
+          padding: 0 20px; /* Adiciona padding lateral */
+        }
         h1 {
             font-size: 32px;
             color: #333;
@@ -152,46 +157,46 @@ defmodule DesafioFullstackWeb.DetailActivityLive do
 
       <body>
         <h1><strong>O que fazer em <span style="color: #007bff;">Maceió?</span></strong></h1>
-
-        <div class="header">
-          <a href="#" phx-click="back">← Voltar</a>
-        </div>
-
-        <div class="place-title"><%= @activity.title %></div>
-
-        <div class="tags">
-          <%= for tag <- @activity.tags do %>
-            <div class="tag"><%= tag %></div>
-          <% end %>
-        </div>
-
-        <div class="description-and-photos">
-          <div class="left-content">
-            <span class="description-label">Descrição</span>
-            <div class="description">
-              <%= @activity.description %>
-            </div>
-
-            <div class="buttons">
-              <a href="#" class="button">
-                <Heroicons.map_pin solid class="icon" /> Google Maps
-              </a>
-              <a href="#" class="button instagram">
-                <Heroicons.camera solid class="icon" /> Instagram
-              </a>
-            </div>
+        <div class="container">
+          <div class="header">
+            <a href="#" phx-click="back">← Voltar</a>
           </div>
 
-          <div class="right-content">
-            <div class="photo-label-container">
-              <div class="photo-label">Fotos</div>
+          <div class="place-title"><%= @activity.title %></div>
+
+          <div class="tags">
+            <%= for tag <- @activity.tags do %>
+              <div class="tag"><%= tag %></div>
+            <% end %>
+          </div>
+
+          <div class="description-and-photos">
+            <div class="left-content">
+              <span class="description-label">Descrição</span>
+              <div class="description">
+                <%= @activity.description %>
+              </div>
+
+              <div class="buttons">
+                <a href="#" class="button">
+                  <Heroicons.map_pin solid class="icon" /> Google Maps
+                </a>
+                <a href="#" class="button instagram">
+                  <Heroicons.camera solid class="icon" /> Instagram
+                </a>
+              </div>
             </div>
-            <div class="photos">
-              <img src="https://picsum.photos/536/700" alt="Imagem atividade">
+
+            <div class="right-content">
+              <div class="photo-label-container">
+                <div class="photo-label">Fotos</div>
+              </div>
+              <div class="photos">
+                <img src="https://picsum.photos/536/700" alt="Imagem atividade">
+              </div>
             </div>
           </div>
         </div>
-
       </body>
     """
   end

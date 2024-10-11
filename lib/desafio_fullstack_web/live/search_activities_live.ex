@@ -279,6 +279,7 @@ defmodule DesafioFullstackWeb.SearchActivitiesLive do
               <div class="tag" phx-click="toggle_tag" phx-value-tag="Praça" id="Praça">Praça</div>
               <div class="tag" phx-click="toggle_tag" phx-value-tag="Passeio" id="Passeio">Passeio</div>
               <div class="tag" phx-click="toggle_tag" phx-value-tag="Saúde" id="Saúde">Saúde</div>
+              <div class="tag" phx-click="toggle_tag" phx-value-tag="esportes" id="esportes">esportes</div>
             </div>
           </div>
         </div>

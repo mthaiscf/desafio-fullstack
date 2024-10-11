@@ -149,7 +149,6 @@ defmodule DesafioFullstack.Activities do
   """
   @spec search_activities(String.t(), [String.t()]) :: [Activity.t()] | []
   def search_activities(title, tags) do
-    IO.inspect("@search_activities(title, tags) ")
     search_activities_private(title, tags)
   end
 

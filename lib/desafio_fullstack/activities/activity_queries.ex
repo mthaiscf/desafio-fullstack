@@ -17,9 +17,13 @@ defmodule DesafioFullstack.Activities.ActivityQueries do
   end
 
   @spec get_by_tags(any(), any()) :: Ecto.Query.t()
-  def get_by_tags(query \\ base(), tag) do
+  def get_by_tags(query \\ base(), tags) do
+
+    first_tag =  List.first(tags) # por enquanto so compara o primeiro elemento
+
+    #SELECT * FROM activities a WHERE '{"esportes", "educativo"}' && a.tags; to do: ajustar query
     from(activities in query,
-      where: ^tag in activities.tags
+     where: ^first_tag in activities.tags
     )
   end
 
