@@ -80,15 +80,15 @@ defmodule DesafioFullstack.Activities do
     iex>
     iex> params = insert(:activity, tags: ["gratuito"])
     iex>
-  	iex> Activities.get_by_tag("gratuito")
+  	iex> Activities.get_by_tags("gratuito")
     [%Activity{}]
-    iex > Activities.get_by_tag("")
+    iex > Activities.get_by_tags("")
     []
   """
-  @spec get_by_tag(String.t()) :: [Activity.t()] | []
-  def get_by_tag(tag) do
-    tag
-    |> ActivityQueries.get_by_tag()
+  @spec get_by_tags(String.t()) :: [Activity.t()] | []
+  def get_by_tags(tags) do
+    tags
+    |> ActivityQueries.get_by_tags()
     |> Repo.all()
   end
 
@@ -142,40 +142,33 @@ defmodule DesafioFullstack.Activities do
     iex>
     iex> params = insert(:activity, title: "Parque Botânico",  tags: ["gratuito"])
     iex>
-  	iex> Activities.get_by_title_and_tags("Parque Botânico", ["gratuito"])
+  	iex> Activities.search_activities("Parque Botânico", ["gratuito"])
     [%Activity{}]
-    iex > Activities.get_by_title_and_tags("", [""])
+    iex > Activities.search_activities("", [""])
     []
   """
-  @spec get_by_title_and_tags(String.t(), [String.t()]) :: [Activity.t()] | []
-  def get_by_title_and_tags(title, tags) do
-    #tags
-    #|> Enum.map(fn tag -> ActivityQueries.get_by_tag(tag) end)
-    #|> ActivityQueries.get_by_title(title)
-    #|> Repo.all()
-
-    get_by_city("Maceió")
+  @spec search_activities(String.t(), [String.t()]) :: [Activity.t()] | []
+  def search_activities(title, tags) do
+    IO.inspect("@search_activities(title, tags) ")
+    search_activities_private(title, tags)
   end
 
-  @spec get_by_title_and_tags(String.t(), [String.t()]) :: [Activity.t()] | []
-  def search_activities(title, tags) when (title != nil and title != "" and tags != nil) do
-    #get_by_title_and_tags(title, tags)
-    get_by_city("Maceió")
+  defp search_activities_private(title, tags) when (tags != [] and title != "") do
+    tags
+    |> ActivityQueries.get_by_tags()
+    |> ActivityQueries.get_by_title(title)
+    |> Repo.all()
   end
 
-  def search_activities(_title, tags) when (tags != nil) do
-    #tags
-    #|> Enum.map(fn tag -> ActivityQueries.get_by_tag(tag) end)
-    #|> Repo.all()
-    get_by_city("Maceió")
+  defp search_activities_private(_title, tags) when (tags != []) do
+    get_by_tags(tags)
   end
 
-  def search_activities(title, _tags) when (title != nil and title != "") do
-    #get_by_title(title)
-    get_by_city("Maceió")
+  defp search_activities_private(title, _tags) when (title != "") do
+    get_by_title(title)
   end
 
-  def search_activities(_title, _tags)do
+  defp search_activities_private(_title, _tags)do
     get_by_city("Maceió")
   end
 end

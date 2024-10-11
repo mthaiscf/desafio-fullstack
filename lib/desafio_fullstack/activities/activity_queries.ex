@@ -9,18 +9,21 @@ defmodule DesafioFullstack.Activities.ActivityQueries do
   alias DesafioFullstack.Activities.Activity
 
 
+  @spec get_by_city(any(), any()) :: Ecto.Query.t()
   def get_by_city(query \\ base(), city) do
     from(activities in query,
       where: activities.city == ^city
     )
   end
 
-  def get_by_tag(query \\ base(), tag) do
+  @spec get_by_tags(any(), any()) :: Ecto.Query.t()
+  def get_by_tags(query \\ base(), tag) do
     from(activities in query,
       where: ^tag in activities.tags
     )
   end
 
+  @spec get_by_title(any(), any()) :: Ecto.Query.t()
   def get_by_title(query \\ base(), title) do
     like = "%#{title}%"
     from(activities in query,

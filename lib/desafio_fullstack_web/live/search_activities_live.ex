@@ -290,7 +290,7 @@ defmodule DesafioFullstackWeb.SearchActivitiesLive do
 
     <%= if @activities_list_lenght > 0 do %>
       <div class="activity-count"><%= @activities_list_lenght %> Atividade(s) encontrada(s)</div>
-    <%= end %>
+    <% end %>
 
     <!-- Reaplicação do estilo de título e tags para cada atividade encontrada -->
     <%= for actv <- @activities_list do %>
