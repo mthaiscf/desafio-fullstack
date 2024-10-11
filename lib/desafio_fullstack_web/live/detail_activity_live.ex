@@ -62,21 +62,23 @@ defmodule DesafioFullstackWeb.DetailActivityLive do
             margin-top: 10px;
             color: #111;
             text-align: left;
-            margin-bottom: 5px; /* Diminui a margem entre o título e as tags */
+            margin-bottom: 0px; /* Diminui a margem entre o título e as tags */
         }
+
         .tags {
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
-            margin: 10px 0; /* Reduz a margem entre as tags */
+            margin: 5px 0; /* Reduz a margem entre as tags e o título */
         }
+
         .tag {
             background-color: #e1e1e1;
             color: #333;
-            border-radius: 15px; /* Contorno mais arredondado */
-            padding: 3px 8px;  /* Reduz o padding das tags */
-            margin: 3px; /* Reduz o espaçamento entre as tags */
-            font-size: 14px; /* Tamanho ajustado para coincidir com a descrição */
+            border-radius: 10px; /* Reduz o contorno mais arredondado */
+            padding: 2px 6px;  /* Diminui o padding das tags */
+            margin: 2px; /* Reduz o espaçamento entre as tags */
+            font-size: 14px;
         }
         .description-label {
             font-weight: bold;
@@ -100,18 +102,24 @@ defmodule DesafioFullstackWeb.DetailActivityLive do
         .button {
             display: inline-flex;
             align-items: center;
-            padding: 6px 12px; /* Diminuído pela metade */
+            height: 30px; /* Altura fixa */
+            padding: 3px 6px; /* Diminuído para metade da altura */
+            line-height: 30px; /* Para centralizar o texto verticalmente */
             background-color: #007bff;
             color: white;
             border-radius: 5px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 10px; /* Tamanho da fonte reduzido */
         }
         .button.instagram {
+            margin-right: 5px;
             background-color: #e4405f;
         }
         .button .icon {
-            margin-right: 8px;
+          margin-right: 5px;
+          width: 20px;  /* Defina um tamanho específico */
+          height: 20px; /* Ajuste conforme necessário */
+          vertical-align: middle; /* Centraliza o ícone verticalmente */
         }
         .photos img {
             width: 100%;

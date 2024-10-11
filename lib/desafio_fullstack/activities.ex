@@ -72,7 +72,7 @@ defmodule DesafioFullstack.Activities do
 
   @doc """
 
-    Recupera as atividades registradas por tags
+    Recupera as atividades registradas por tag
 
   ## Exemplo:
 
@@ -80,15 +80,15 @@ defmodule DesafioFullstack.Activities do
     iex>
     iex> params = insert(:activity, tags: ["gratuito"])
     iex>
-  	iex> Activities.get_by_tags(["gratuito"])
+  	iex> Activities.get_by_tag("gratuito")
     [%Activity{}]
-    iex > Activities.get_by_tags([""])
+    iex > Activities.get_by_tag("")
     []
   """
-  @spec get_by_tags([String.t()]) :: [Activity.t()] | []
-  def get_by_tags(tags) do
-    tags
-    |> ActivityQueries.get_by_tags()
+  @spec get_by_tag(String.t()) :: [Activity.t()] | []
+  def get_by_tag(tag) do
+    tag
+    |> ActivityQueries.get_by_tag()
     |> Repo.all()
   end
 
@@ -149,23 +149,30 @@ defmodule DesafioFullstack.Activities do
   """
   @spec get_by_title_and_tags(String.t(), [String.t()]) :: [Activity.t()] | []
   def get_by_title_and_tags(title, tags) do
-    title
-    |> ActivityQueries.get_by_title()
-    |> ActivityQueries.get_by_tags(tags)
-    |> Repo.all()
+    #tags
+    #|> Enum.map(fn tag -> ActivityQueries.get_by_tag(tag) end)
+    #|> ActivityQueries.get_by_title(title)
+    #|> Repo.all()
+
+    get_by_city("Maceió")
   end
 
   @spec get_by_title_and_tags(String.t(), [String.t()]) :: [Activity.t()] | []
-  def search_activities(title, tags) when (title != nil and tags != nil) do
-    get_by_title_and_tags(title, tags)
+  def search_activities(title, tags) when (title != nil and title != "" and tags != nil) do
+    #get_by_title_and_tags(title, tags)
+    get_by_city("Maceió")
   end
 
   def search_activities(_title, tags) when (tags != nil) do
-    get_by_tags(tags)
+    #tags
+    #|> Enum.map(fn tag -> ActivityQueries.get_by_tag(tag) end)
+    #|> Repo.all()
+    get_by_city("Maceió")
   end
 
-  def search_activities(title, _tags) when (title != nil) do
-    get_by_title(title)
+  def search_activities(title, _tags) when (title != nil and title != "") do
+    #get_by_title(title)
+    get_by_city("Maceió")
   end
 
   def search_activities(_title, _tags)do

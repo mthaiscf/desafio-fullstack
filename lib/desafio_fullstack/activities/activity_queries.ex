@@ -15,9 +15,9 @@ defmodule DesafioFullstack.Activities.ActivityQueries do
     )
   end
 
-  def get_by_tags(query \\ base(), tags) do
+  def get_by_tag(query \\ base(), tag) do
     from(activities in query,
-      where: ^tags in activities.tags
+      where: ^tag in activities.tags
     )
   end
 
